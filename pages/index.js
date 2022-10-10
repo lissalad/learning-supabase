@@ -1,42 +1,43 @@
 import Head from "next/head";
 import Image from "next/image";
-import OpinionCard from "../components/OpinionCard";
+import PostCard from "../components/PostCard";
 import { supabase } from "../utils/supabaseClient";
 import { useEffect, useState } from "react";
 import styles from "../styles/Home.module.css";
+import Error from "../components/Error";
 
 export default function Home() {
   const [fetchError, setFetchError] = useState(null);
-  const [opinions, setOpinions] = useState(null);
+  const [Posts, setPosts] = useState(null);
 
   useEffect(() => {
-    const fetchOpinions = async () => {
-      const { data, error } = await supabase.from("opinions").select();
+    const fetchPosts = async () => {
+      const { data, error } = await supabase.from("posts").select();
 
       // if failed
       if (error) {
-        setFetchError("failure!!!!");
-        setOpinions(null);
+        setFetchError("failure! you are bad");
+        setContent(null);
         console.log(error);
       }
 
       // if good
       if (data) {
-        setOpinions(data);
+        setPosts(data);
         setFetchError(null);
       }
     };
 
-    fetchOpinions();
+    fetchPosts();
   }, []);
 
   return (
     <main>
-      {fetchError && <p>fetchError</p>}
-      {opinions && (
+      {fetchError && <Error error={fetchError} />}
+      {Posts && (
         <div className="flex flex-col space-y-5">
-          {opinions.map((opinion) => (
-            <OpinionCard key={opinion.id} opinion={opinion} />
+          {Posts.map((post) => (
+            <PostCard key={post.id} post={post} />
           ))}
         </div>
       )}

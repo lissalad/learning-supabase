@@ -4,8 +4,25 @@
 
 html {
   font-family: 'Roboto', sans-serif;
+  /* @apply text-red-900; */
 }
 
 main {
-  @apply max-w-[900px] md:py-4 mx-auto px-4 sm:px-6 md:px-8;
+  @apply max-w-[900px] mx-auto px-4 sm:px-6 md:px-8;
+}
+
+input, textarea {
+  @apply border-2 border-zinc-200 bg-white/90 px-1.5 py-0.5 rounded-sm w-full text-zinc-800 w-full;
+}
+
+button {
+  @apply bg-sky-200/80 px-3 py-1 rounded shadow-xl text-sky-900 hover:bg-sky-200 mx-auto;
+}
+
+form {
+  @apply bg-rose-200/50 w-fit px-5 py-3 flex flex-col items-start rounded shadow-xl space-y-3;
+}
+
+label {
+  @apply text-sm;
 }
